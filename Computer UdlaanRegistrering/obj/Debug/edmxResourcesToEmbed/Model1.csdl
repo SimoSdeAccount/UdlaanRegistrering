@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RegistreringDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Computer">
+    <Key>
+      <PropertyRef Name="Computernummer" />
+    </Key>
+    <Property Name="Computernummer" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Antal" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Model1" Relationship="Self.FK__Computer__Model__5BE2A6F2" FromRole="Computer" ToRole="Model" />
+  </EntityType>
+  <EntityType Name="Elev">
+    <Key>
+      <PropertyRef Name="Elevnummer" />
+    </Key>
+    <Property Name="Elevnummer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CPR" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Navn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Adresse" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Postnr" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Stamklasse" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Postnummer" Relationship="Self.FK__Elev__Postnr__4D94879B" FromRole="Elev" ToRole="Postnummer" />
+    <NavigationProperty Name="Stamklasse1" Relationship="Self.FK__Elev__Stamklasse__4E88ABD4" FromRole="Elev" ToRole="Stamklasse" />
+    <NavigationProperty Name="Udlån" Relationship="Self.FK__Udlån__Elevnumme__534D60F1" FromRole="Elev" ToRole="Udlån" />
+  </EntityType>
+  <EntityType Name="Fabrikat">
+    <Key>
+      <PropertyRef Name="Navn" />
+    </Key>
+    <Property Name="Navn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Model" Relationship="Self.FK__Model__Fabrikat__59063A47" FromRole="Fabrikat" ToRole="Model" />
+  </EntityType>
+  <EntityType Name="Model">
+    <Key>
+      <PropertyRef Name="Navn" />
+    </Key>
+    <Property Name="Navn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Fabrikat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Computer" Relationship="Self.FK__Computer__Model__5BE2A6F2" FromRole="Model" ToRole="Computer" />
+    <NavigationProperty Name="Fabrikat1" Relationship="Self.FK__Model__Fabrikat__59063A47" FromRole="Model" ToRole="Fabrikat" />
+  </EntityType>
+  <EntityType Name="Mus">
+    <Key>
+      <PropertyRef Name="Mustype" />
+    </Key>
+    <Property Name="Mustype" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Udlån" Relationship="Self.FK__Udlån__Mus__5441852A" FromRole="Mus" ToRole="Udlån" />
+  </EntityType>
+  <EntityType Name="Postnummer">
+    <Key>
+      <PropertyRef Name="Postnr" />
+    </Key>
+    <Property Name="Postnr" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Bynavn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Elev" Relationship="Self.FK__Elev__Postnr__4D94879B" FromRole="Postnummer" ToRole="Elev" />
+  </EntityType>
+  <EntityType Name="Stamklasse">
+    <Key>
+      <PropertyRef Name="Klassenummer" />
+    </Key>
+    <Property Name="Klassenummer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Elev" Relationship="Self.FK__Elev__Stamklasse__4E88ABD4" FromRole="Stamklasse" ToRole="Elev" />
+  </EntityType>
+  <EntityType Name="Udlån">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Elevnummer" Type="Int32" Nullable="false" />
+    <Property Name="Mus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Udlånsdato" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Udløbsdato" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Elev" Relationship="Self.FK__Udlån__Elevnumme__534D60F1" FromRole="Udlån" ToRole="Elev" />
+    <NavigationProperty Name="Mus1" Relationship="Self.FK__Udlån__Mus__5441852A" FromRole="Udlån" ToRole="Mus" />
+  </EntityType>
+  <Association Name="FK__Computer__Model__5BE2A6F2">
+    <End Role="Model" Type="Self.Model" Multiplicity="1" />
+    <End Role="Computer" Type="Self.Computer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Model">
+        <PropertyRef Name="Navn" />
+      </Principal>
+      <Dependent Role="Computer">
+        <PropertyRef Name="Model" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Elev__Postnr__4D94879B">
+    <End Role="Postnummer" Type="Self.Postnummer" Multiplicity="1" />
+    <End Role="Elev" Type="Self.Elev" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Postnummer">
+        <PropertyRef Name="Postnr" />
+      </Principal>
+      <Dependent Role="Elev">
+        <PropertyRef Name="Postnr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Elev__Stamklasse__4E88ABD4">
+    <End Role="Stamklasse" Type="Self.Stamklasse" Multiplicity="1" />
+    <End Role="Elev" Type="Self.Elev" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stamklasse">
+        <PropertyRef Name="Klassenummer" />
+      </Principal>
+      <Dependent Role="Elev">
+        <PropertyRef Name="Stamklasse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Udlån__Elevnumme__534D60F1">
+    <End Role="Elev" Type="Self.Elev" Multiplicity="1" />
+    <End Role="Udlån" Type="Self.Udlån" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Elev">
+        <PropertyRef Name="Elevnummer" />
+      </Principal>
+      <Dependent Role="Udlån">
+        <PropertyRef Name="Elevnummer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Model__Fabrikat__59063A47">
+    <End Role="Fabrikat" Type="Self.Fabrikat" Multiplicity="1" />
+    <End Role="Model" Type="Self.Model" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fabrikat">
+        <PropertyRef Name="Navn" />
+      </Principal>
+      <Dependent Role="Model">
+        <PropertyRef Name="Fabrikat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Udlån__Mus__5441852A">
+    <End Role="Mus" Type="Self.Mus" Multiplicity="1" />
+    <End Role="Udlån" Type="Self.Udlån" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mus">
+        <PropertyRef Name="Mustype" />
+      </Principal>
+      <Dependent Role="Udlån">
+        <PropertyRef Name="Mus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RegistreringDBEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Computer" EntityType="Self.Computer" />
+    <EntitySet Name="Elev" EntityType="Self.Elev" />
+    <EntitySet Name="Fabrikat" EntityType="Self.Fabrikat" />
+    <EntitySet Name="Model" EntityType="Self.Model" />
+    <EntitySet Name="Mus" EntityType="Self.Mus" />
+    <EntitySet Name="Postnummer" EntityType="Self.Postnummer" />
+    <EntitySet Name="Stamklasse" EntityType="Self.Stamklasse" />
+    <EntitySet Name="Udlån" EntityType="Self.Udlån" />
+    <AssociationSet Name="FK__Computer__Model__5BE2A6F2" Association="Self.FK__Computer__Model__5BE2A6F2">
+      <End Role="Model" EntitySet="Model" />
+      <End Role="Computer" EntitySet="Computer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Elev__Postnr__4D94879B" Association="Self.FK__Elev__Postnr__4D94879B">
+      <End Role="Postnummer" EntitySet="Postnummer" />
+      <End Role="Elev" EntitySet="Elev" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Elev__Stamklasse__4E88ABD4" Association="Self.FK__Elev__Stamklasse__4E88ABD4">
+      <End Role="Stamklasse" EntitySet="Stamklasse" />
+      <End Role="Elev" EntitySet="Elev" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Udlån__Elevnumme__534D60F1" Association="Self.FK__Udlån__Elevnumme__534D60F1">
+      <End Role="Elev" EntitySet="Elev" />
+      <End Role="Udlån" EntitySet="Udlån" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Model__Fabrikat__59063A47" Association="Self.FK__Model__Fabrikat__59063A47">
+      <End Role="Fabrikat" EntitySet="Fabrikat" />
+      <End Role="Model" EntitySet="Model" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Udlån__Mus__5441852A" Association="Self.FK__Udlån__Mus__5441852A">
+      <End Role="Mus" EntitySet="Mus" />
+      <End Role="Udlån" EntitySet="Udlån" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

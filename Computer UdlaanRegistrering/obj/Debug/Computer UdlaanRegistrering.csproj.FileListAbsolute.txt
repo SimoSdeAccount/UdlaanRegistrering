@@ -1,0 +1,26 @@
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\bin\Debug\RegistreringDB.mdf
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\bin\Debug\RegistreringDB_log.ldf
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\bin\Debug\Computer UdlaanRegistrering.exe.config
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\bin\Debug\Computer UdlaanRegistrering.exe
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\bin\Debug\Computer UdlaanRegistrering.pdb
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\bin\Debug\EntityFramework.dll
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\bin\Debug\EntityFramework.xml
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\obj\Debug\Computer UdlaanRegistrering.csprojAssemblyReference.cache
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\obj\Debug\MainWindow.g.cs
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\obj\Debug\Oversigter.g.cs
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\obj\Debug\RegistrerUdlaan.g.cs
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\obj\Debug\App.g.cs
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\obj\Debug\Computer UdlaanRegistrering_Content.g.cs
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\obj\Debug\Computer UdlaanRegistrering_MarkupCompile.cache
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\obj\Debug\Computer UdlaanRegistrering_MarkupCompile.lref
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\obj\Debug\MainWindow.baml
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\obj\Debug\Oversigter.baml
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\obj\Debug\RegistrerUdlaan.baml
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\obj\Debug\Computer UdlaanRegistrering.g.resources
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\obj\Debug\Computer_UdlaanRegistrering.Properties.Resources.resources
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\obj\Debug\Computer UdlaanRegistrering.csproj.GenerateResource.cache
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\obj\Debug\Computer UdlaanRegistrering.csproj.CopyComplete
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\obj\Debug\Computer UdlaanRegistrering.exe
+C:\Users\Simon\source\repos\Computer UdlaanRegistrering\Computer UdlaanRegistrering\obj\Debug\Computer UdlaanRegistrering.pdb

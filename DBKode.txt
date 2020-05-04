@@ -1,0 +1,95 @@
+----------------------Kode til at generere database---------------------------
+CREATE TABLE Postnummer (
+Postnr char(4) NOT NULL PRIMARY KEY,
+Bynavn nvarchar(50) NOT NULL
+)
+CREATE TABLE Stamklasse (
+Klassenummer nvarchar(50) NOT NULL PRIMARY KEY
+)
+CREATE TABLE Elev (
+Elevnummer int IDENTITY(1,1) NOT NULL PRIMARY KEY,
+CPR char(10) NOT NULL,
+Navn nvarchar(50) NOT NULL,
+Adresse nvarchar(50) NOT NULL,
+Postnr char(4) NOT NULL FOREIGN KEY REFERENCES Postnummer(Postnr),
+Email nvarchar(50) NOT NULL,
+Stamklasse nvarchar(50) NOT NULL FOREIGN KEY REFERENCES Stamklasse(Klassenummer)
+)
+CREATE TABLE Mus (
+Mustype nvarchar(50) NOT NULL PRIMARY KEY
+)
+CREATE TABLE LånStatus (
+UdlånStatus nvarchar(50) NOT NULL
+)
+CREATE TABLE Udlån (
+Id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
+Elevnummer int NOT NULL FOREIGN KEY REFERENCES Elev(Elevnummer),
+Mus nvarchar(50) NOT NULL FOREIGN KEY REFERENCES Mus(Mustype),
+Udlånsdato date NOT NULL,
+Udløbsdato date NOT NULL,
+Lånstatus nvarchar(50) NOT NULL FOREIGN KEY REFERENCES LånStatus(UdlånStatus)
+)
+
+CREATE TABLE Fabrikat (
+Navn nvarchar(50) NOT NULL PRIMARY KEY
+)
+
+CREATE TABLE Model (
+Navn nvarchar(50) NOT NULL PRIMARY KEY,
+Fabrikat nvarchar(50) NOT NULL FOREIGN KEY REFERENCES Fabrikat(Navn)
+)
+
+CREATE TABLE Computer (
+Computernummer char(4) NOT NULL PRIMARY KEY,
+Model nvarchar(50) NOT NULL FOREIGN KEY REFERENCES Model(Navn),
+Antal int NOT NULL
+)
+
+CREATE TABLE UdlånComputere (
+UdlånId int FOREIGN KEY REFERENCES Udlån(Id),
+Computernummer char(4) FOREIGN KEY REFERENCES Computer(Computernummer)
+)
+
+-----------------------------Views-----------------------------------
+
+---Computerview:
+
+CREATE VIEW [dbo].[ComputerView]
+AS 
+SELECT * FROM [Computer]
+
+---Eleverview:
+
+CREATE VIEW [dbo].[EleverView]
+AS 
+SELECT * FROM [Elev]
+
+---TilgængeligComputereview:
+
+CREATE VIEW [dbo].[TilgaengeligComputere]
+AS 
+SELECT 
+Computer.Model, 
+(SELECT SUM(UdlånComputere.Computerantal) FROM UdlånComputere WHERE UdlånComputere.Computernummer = Computer.Computernummer) AS UdlåntAntal, 
+Computer.Antal AS SamletAntal,
+ABS(Computer.Antal - (SELECT SUM(UdlånComputere.Computerantal) FROM UdlånComputere WHERE UdlånComputere.Computernummer = Computer.Computernummer)) AS TilRådighed
+FROM Computer
+
+---UdlaanView:
+
+CREATE VIEW [dbo].[UdlaanView]
+AS
+SELECT 
+Elev.Elevnummer AS Elevnummer, 
+Elev.Navn AS Elevnavn, 
+Udlån.Id AS UdlånId, 
+Computer.Model AS Computer,
+Udlån.Mus AS Mus, 
+UdlånComputere.Computerantal AS Computerantal, 
+Udlån.Udlånsdato AS Udlånsdato, 
+Udlån.Udløbsdato AS Udløbsdato, 
+Udlån.Lånstatus AS Lånstatus 
+FROM Udlån
+INNER JOIN Elev ON Elev.Elevnummer = Udlån.Elevnummer
+INNER JOIN UdlånComputere ON UdlånComputere.UdlånId = Udlån.Id
+INNER JOIN Computer ON Computer.Computernummer = UdlånComputere.Computernummer

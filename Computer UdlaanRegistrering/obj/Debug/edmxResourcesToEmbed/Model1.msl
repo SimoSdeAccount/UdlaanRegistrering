@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RegistreringDBModelStoreContainer" CdmEntityContainer="RegistreringDBEntities2">
+    <EntitySetMapping Name="Computer">
+      <EntityTypeMapping TypeName="RegistreringDBModel.Computer">
+        <MappingFragment StoreEntitySet="Computer">
+          <ScalarProperty Name="Computernummer" ColumnName="Computernummer" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Antal" ColumnName="Antal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Elev">
+      <EntityTypeMapping TypeName="RegistreringDBModel.Elev">
+        <MappingFragment StoreEntitySet="Elev">
+          <ScalarProperty Name="Elevnummer" ColumnName="Elevnummer" />
+          <ScalarProperty Name="CPR" ColumnName="CPR" />
+          <ScalarProperty Name="Navn" ColumnName="Navn" />
+          <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+          <ScalarProperty Name="Postnr" ColumnName="Postnr" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Stamklasse" ColumnName="Stamklasse" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fabrikat">
+      <EntityTypeMapping TypeName="RegistreringDBModel.Fabrikat">
+        <MappingFragment StoreEntitySet="Fabrikat">
+          <ScalarProperty Name="Navn" ColumnName="Navn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Model">
+      <EntityTypeMapping TypeName="RegistreringDBModel.Model">
+        <MappingFragment StoreEntitySet="Model">
+          <ScalarProperty Name="Navn" ColumnName="Navn" />
+          <ScalarProperty Name="Fabrikat" ColumnName="Fabrikat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mus">
+      <EntityTypeMapping TypeName="RegistreringDBModel.Mus">
+        <MappingFragment StoreEntitySet="Mus">
+          <ScalarProperty Name="Mustype" ColumnName="Mustype" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Postnummer">
+      <EntityTypeMapping TypeName="RegistreringDBModel.Postnummer">
+        <MappingFragment StoreEntitySet="Postnummer">
+          <ScalarProperty Name="Postnr" ColumnName="Postnr" />
+          <ScalarProperty Name="Bynavn" ColumnName="Bynavn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stamklasse">
+      <EntityTypeMapping TypeName="RegistreringDBModel.Stamklasse">
+        <MappingFragment StoreEntitySet="Stamklasse">
+          <ScalarProperty Name="Klassenummer" ColumnName="Klassenummer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Udlån">
+      <EntityTypeMapping TypeName="RegistreringDBModel.Udlån">
+        <MappingFragment StoreEntitySet="Udlån">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Elevnummer" ColumnName="Elevnummer" />
+          <ScalarProperty Name="Mus" ColumnName="Mus" />
+          <ScalarProperty Name="Udlånsdato" ColumnName="Udlånsdato" />
+          <ScalarProperty Name="Udløbsdato" ColumnName="Udløbsdato" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

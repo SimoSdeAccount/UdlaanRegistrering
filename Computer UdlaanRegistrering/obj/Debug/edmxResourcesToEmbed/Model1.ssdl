@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RegistreringDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Computer">
+    <Key>
+      <PropertyRef Name="Computernummer" />
+    </Key>
+    <Property Name="Computernummer" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Antal" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Elev">
+    <Key>
+      <PropertyRef Name="Elevnummer" />
+    </Key>
+    <Property Name="Elevnummer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CPR" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="Navn" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Adresse" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Postnr" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Stamklasse" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Fabrikat">
+    <Key>
+      <PropertyRef Name="Navn" />
+    </Key>
+    <Property Name="Navn" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Model">
+    <Key>
+      <PropertyRef Name="Navn" />
+    </Key>
+    <Property Name="Navn" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Fabrikat" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Mus">
+    <Key>
+      <PropertyRef Name="Mustype" />
+    </Key>
+    <Property Name="Mustype" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Postnummer">
+    <Key>
+      <PropertyRef Name="Postnr" />
+    </Key>
+    <Property Name="Postnr" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="Bynavn" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Stamklasse">
+    <Key>
+      <PropertyRef Name="Klassenummer" />
+    </Key>
+    <Property Name="Klassenummer" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Udlån">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Elevnummer" Type="int" Nullable="false" />
+    <Property Name="Mus" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Udlånsdato" Type="date" Nullable="false" />
+    <Property Name="Udløbsdato" Type="date" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'C:\USERS\SIMON\SOURCE\REPOS\COMPUTER UDLAANREGISTRERING\COMPUTER UDLAANREGISTRERING\REGISTRERINGDB.MDF.dbo.UdlånComputere' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="UdlånComputere">
+          <Property Name="UdlånId" Type="int" />
+          <Property Name="Computernummer" Type="char" MaxLength="4" />
+        </EntityType>-->
+  <Association Name="FK__Computer__Model__5BE2A6F2">
+    <End Role="Model" Type="Self.Model" Multiplicity="1" />
+    <End Role="Computer" Type="Self.Computer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Model">
+        <PropertyRef Name="Navn" />
+      </Principal>
+      <Dependent Role="Computer">
+        <PropertyRef Name="Model" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Elev__Postnr__4D94879B">
+    <End Role="Postnummer" Type="Self.Postnummer" Multiplicity="1" />
+    <End Role="Elev" Type="Self.Elev" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Postnummer">
+        <PropertyRef Name="Postnr" />
+      </Principal>
+      <Dependent Role="Elev">
+        <PropertyRef Name="Postnr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Elev__Stamklasse__4E88ABD4">
+    <End Role="Stamklasse" Type="Self.Stamklasse" Multiplicity="1" />
+    <End Role="Elev" Type="Self.Elev" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stamklasse">
+        <PropertyRef Name="Klassenummer" />
+      </Principal>
+      <Dependent Role="Elev">
+        <PropertyRef Name="Stamklasse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Model__Fabrikat__59063A47">
+    <End Role="Fabrikat" Type="Self.Fabrikat" Multiplicity="1" />
+    <End Role="Model" Type="Self.Model" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fabrikat">
+        <PropertyRef Name="Navn" />
+      </Principal>
+      <Dependent Role="Model">
+        <PropertyRef Name="Fabrikat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Udlån__Elevnumme__534D60F1">
+    <End Role="Elev" Type="Self.Elev" Multiplicity="1" />
+    <End Role="Udlån" Type="Self.Udlån" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Elev">
+        <PropertyRef Name="Elevnummer" />
+      </Principal>
+      <Dependent Role="Udlån">
+        <PropertyRef Name="Elevnummer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Udlån__Mus__5441852A">
+    <End Role="Mus" Type="Self.Mus" Multiplicity="1" />
+    <End Role="Udlån" Type="Self.Udlån" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mus">
+        <PropertyRef Name="Mustype" />
+      </Principal>
+      <Dependent Role="Udlån">
+        <PropertyRef Name="Mus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+error 6004: The table 'C:\USERS\SIMON\SOURCE\REPOS\COMPUTER UDLAANREGISTRERING\COMPUTER UDLAANREGISTRERING\REGISTRERINGDB.MDF.dbo.UdlånComputere' is referenced by a relationship, but cannot be found.
+        <Association Name="FK__UdlånComp__Compu__5EBF139D" />-->
+  <!--Errors Found During Generation:
+error 6004: The table 'C:\USERS\SIMON\SOURCE\REPOS\COMPUTER UDLAANREGISTRERING\COMPUTER UDLAANREGISTRERING\REGISTRERINGDB.MDF.dbo.UdlånComputere' is referenced by a relationship, but cannot be found.
+        <Association Name="FK__UdlånComp__Udlån__5DCAEF64" />-->
+  <EntityContainer Name="RegistreringDBModelStoreContainer">
+    <EntitySet Name="Computer" EntityType="Self.Computer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Elev" EntityType="Self.Elev" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Fabrikat" EntityType="Self.Fabrikat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mus" EntityType="Self.Mus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Postnummer" EntityType="Self.Postnummer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Stamklasse" EntityType="Self.Stamklasse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Udlån" EntityType="Self.Udlån" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Computer__Model__5BE2A6F2" Association="Self.FK__Computer__Model__5BE2A6F2">
+      <End Role="Model" EntitySet="Model" />
+      <End Role="Computer" EntitySet="Computer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Elev__Postnr__4D94879B" Association="Self.FK__Elev__Postnr__4D94879B">
+      <End Role="Postnummer" EntitySet="Postnummer" />
+      <End Role="Elev" EntitySet="Elev" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Elev__Stamklasse__4E88ABD4" Association="Self.FK__Elev__Stamklasse__4E88ABD4">
+      <End Role="Stamklasse" EntitySet="Stamklasse" />
+      <End Role="Elev" EntitySet="Elev" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Model__Fabrikat__59063A47" Association="Self.FK__Model__Fabrikat__59063A47">
+      <End Role="Fabrikat" EntitySet="Fabrikat" />
+      <End Role="Model" EntitySet="Model" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Udlån__Elevnumme__534D60F1" Association="Self.FK__Udlån__Elevnumme__534D60F1">
+      <End Role="Elev" EntitySet="Elev" />
+      <End Role="Udlån" EntitySet="Udlån" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Udlån__Mus__5441852A" Association="Self.FK__Udlån__Mus__5441852A">
+      <End Role="Mus" EntitySet="Mus" />
+      <End Role="Udlån" EntitySet="Udlån" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
